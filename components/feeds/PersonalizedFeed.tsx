@@ -2,56 +2,204 @@ import ContentCard from "../cards/ContentCard";
 import { HiOutlineSparkles, HiOutlineFilter } from "react-icons/hi";
 
 export default function PersonalizedFeed() {
+  const feedItems = [
+    {
+      title:
+        "TikTok star Khaby Lame signs $975 million AI deal to create his digital twin",
+      description:
+        "The world's most-followed TikToker is venturing into the metaverse with a massive AI partnership.",
+      category: "News",
+      time: "1d ago",
+      image:
+        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
+      action: "Read More",
+      source: "News18",
+    },
+    {
+      title: "On the sets of Ramsay Brothers' Shaitani Ilaaka (1990)",
+      description:
+        "A nostalgic look back at the cult classic horror film featuring Kanwaljit Singh and the Ramsay legacy.",
+      category: "Movies",
+      time: "Trending",
+      image:
+        "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800",
+      action: "Watch Feature",
+      source: "Lehren",
+    },
+    {
+      title: "Parth emerges as key aide in political affairs",
+      description:
+        "New leadership dynamics surfacing as Son Parth takes a central role in Sunetra Pawar’s latest campaigns.",
+      category: "Social",
+      time: "2h ago",
+      image:
+        "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&q=80&w=800",
+      action: "Join Discussion",
+      source: "Hindustan Times",
+    },
+    {
+      title:
+        "TikTok star Khaby Lame signs $975 million AI deal to create his digital twin",
+      description:
+        "The world's most-followed TikToker is venturing into the metaverse with a massive AI partnership.",
+      category: "News",
+      time: "1d ago",
+      image:
+        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
+      action: "Read More",
+      source: "News18",
+    },
+    {
+      title: "On the sets of Ramsay Brothers' Shaitani Ilaaka (1990)",
+      description:
+        "A nostalgic look back at the cult classic horror film featuring Kanwaljit Singh and the Ramsay legacy.",
+      category: "Movies",
+      time: "Trending",
+      image:
+        "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800",
+      action: "Watch Feature",
+      source: "Lehren",
+    },
+    {
+      title: "Parth emerges as key aide in political affairs",
+      description:
+        "New leadership dynamics surfacing as Son Parth takes a central role in Sunetra Pawar’s latest campaigns.",
+      category: "Social",
+      time: "2h ago",
+      image:
+        "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&q=80&w=800",
+      action: "Join Discussion",
+      source: "Hindustan Times",
+    },
+    {
+      title:
+        "TikTok star Khaby Lame signs $975 million AI deal to create his digital twin",
+      description:
+        "The world's most-followed TikToker is venturing into the metaverse with a massive AI partnership.",
+      category: "News",
+      time: "1d ago",
+      image:
+        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
+      action: "Read More",
+      source: "News18",
+    },
+    {
+      title: "On the sets of Ramsay Brothers' Shaitani Ilaaka (1990)",
+      description:
+        "A nostalgic look back at the cult classic horror film featuring Kanwaljit Singh and the Ramsay legacy.",
+      category: "Movies",
+      time: "Trending",
+      image:
+        "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800",
+      action: "Watch Feature",
+      source: "Lehren",
+    },
+    {
+      title: "Parth emerges as key aide in political affairs",
+      description:
+        "New leadership dynamics surfacing as Son Parth takes a central role in Sunetra Pawar’s latest campaigns.",
+      category: "Social",
+      time: "2h ago",
+      image:
+        "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&q=80&w=800",
+      action: "Join Discussion",
+      source: "Hindustan Times",
+    },
+    {
+      title:
+        "TikTok star Khaby Lame signs $975 million AI deal to create his digital twin",
+      description:
+        "The world's most-followed TikToker is venturing into the metaverse with a massive AI partnership.",
+      category: "News",
+      time: "1d ago",
+      image:
+        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
+      action: "Read More",
+      source: "News18",
+    },
+    {
+      title: "On the sets of Ramsay Brothers' Shaitani Ilaaka (1990)",
+      description:
+        "A nostalgic look back at the cult classic horror film featuring Kanwaljit Singh and the Ramsay legacy.",
+      category: "Movies",
+      time: "Trending",
+      image:
+        "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800",
+      action: "Watch Feature",
+      source: "Lehren",
+    },
+    {
+      title: "Parth emerges as key aide in political affairs",
+      description:
+        "New leadership dynamics surfacing as Son Parth takes a central role in Sunetra Pawar’s latest campaigns.",
+      category: "Social",
+      time: "2h ago",
+      image:
+        "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&q=80&w=800",
+      action: "Join Discussion",
+      source: "Hindustan Times",
+    },
+    {
+      title:
+        "TikTok star Khaby Lame signs $975 million AI deal to create his digital twin",
+      description:
+        "The world's most-followed TikToker is venturing into the metaverse with a massive AI partnership.",
+      category: "News",
+      time: "1d ago",
+      image:
+        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
+      action: "Read More",
+      source: "News18",
+    },
+    {
+      title: "On the sets of Ramsay Brothers' Shaitani Ilaaka (1990)",
+      description:
+        "A nostalgic look back at the cult classic horror film featuring Kanwaljit Singh and the Ramsay legacy.",
+      category: "Movies",
+      time: "Trending",
+      image:
+        "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800",
+      action: "Watch Feature",
+      source: "Lehren",
+    },
+    {
+      title: "Parth emerges as key aide in political affairs",
+      description:
+        "New leadership dynamics surfacing as Son Parth takes a central role in Sunetra Pawar’s latest campaigns.",
+      category: "Social",
+      time: "2h ago",
+      image:
+        "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&q=80&w=800",
+      action: "Join Discussion",
+      source: "Hindustan Times",
+    },
+  ];
+
+  const getRandomSpan = () =>
+    Math.random() > 0.6 ? "col-span-1 md:col-span-2" : "col-span-1";
+
   return (
     <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <div className="flex items-center justify-between mb-8 px-2">
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-indigo-50 dark:bg-indigo-500/10 rounded-lg">
-            <HiOutlineSparkles className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-          </div>
-          <div>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
-              Personalized Feed
-            </h2>
-            <p className="text-xs text-slate-500 font-medium">Curated based on your interests</p>
-          </div>
-        </div>
-        
-        <button className="flex items-center gap-2 px-3 py-1.5 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors border border-slate-200 dark:border-slate-700">
-          <HiOutlineFilter className="w-4 h-4" />
-          Filter
-        </button>
-      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 grid-flow-dense gap-y-5 sm:gap-6">
+        {feedItems.map((item, index) => {
+          const spanClass = getRandomSpan();
 
-      <div className="grid grid-cols-1 gap-6">
-        <ContentCard
-          title="Latest Tech News"
-          description="Next-generation AI models are fundamentally shifting the landscape of modern frontend development workflows."
-          category="Technology"
-          time="2 min read"
-          image="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=400"
-          action="Read Article"
-          variant="primary"
-        />
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ContentCard
-            title="Sci-Fi Essentials"
-            description="Explore the top-rated cinematic masterpieces that defined the genre this year."
-            category="Movies"
-            time="5 min read"
-            image="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=400"
-            action="Watch Now"
-          />
-          <ContentCard
-            title="React Ecosystem"
-            description="#ReactJS continues to dominate global trends with the latest Server Components update."
-            category="Social"
-            time="Trending"
-            image="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=400"
-            action="View Discussion"
-          />
-        </div>
+          return (
+            <div key={index} className={spanClass}>
+              <ContentCard
+                title={item.title}
+                description={item.description}
+                category={item.category}
+                time={`${item.source} • ${item.time}`}
+                image={item.image}
+                action={item.action}
+                orientation={
+                  spanClass !== "col-span-1" ? "vertical" : "vertical"
+                }
+              />
+            </div>
+          );
+        })}
       </div>
     </section>
   );

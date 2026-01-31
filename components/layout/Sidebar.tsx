@@ -15,7 +15,7 @@ const navItems = [
 
 export default function Sidebar() {
   return (
-    <aside className="hidden lg:flex w-72 flex-col bg-white dark:bg-[#0F172A] border-r border-slate-200 dark:border-slate-800 transition-all duration-300">
+    <aside className="fixed min-h-screen overflow-hidden w-72 hidden xl:flex flex-col bg-white dark:bg-[#0F172A] border-r border-slate-200 dark:border-slate-800 transition-all duration-300">
       <div className="h-20 flex items-center px-8">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 bg-gradient-to-br from-indigo-600 to-violet-700 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-200 dark:shadow-none">

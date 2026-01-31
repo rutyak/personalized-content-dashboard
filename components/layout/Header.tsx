@@ -2,17 +2,17 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { 
-  HiOutlineMenuAlt2, 
-  HiOutlineSun, 
-  HiOutlineMoon, 
-  HiOutlineSearch, 
+import {
+  HiOutlineMenuAlt2,
+  HiOutlineSun,
+  HiOutlineMoon,
+  HiOutlineSearch,
   HiOutlineBell,
   HiOutlineChevronDown,
   HiX,
   HiOutlineHome,
   HiOutlineStar,
-  HiOutlineCog
+  HiOutlineCog,
 } from "react-icons/hi";
 
 export default function Header() {
@@ -33,38 +33,45 @@ export default function Header() {
   }, [isMobileMenuOpen]);
 
   const navLinks = [
-    { name: "Home", href: "/dashboard", icon: HiOutlineHome },
-    { name: "Favorites", href: "/favorites", icon: HiOutlineStar },
-    { name: "Settings", href: "/settings", icon: HiOutlineCog },
+    { name: "Home", href: "/", icon: HiOutlineHome },
+    { name: "Favorites", href: "/", icon: HiOutlineStar },
+    { name: "Settings", href: "/", icon: HiOutlineCog },
   ];
 
   return (
     <>
-      <header className={`sticky top-0 z-50 w-full transition-all duration-300 border-b 
-        ${scrolled 
-          ? "bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur-md border-slate-200/60 dark:border-slate-800/60 shadow-sm" 
-          : "bg-white dark:bg-[#0F172A] border-transparent"}`}>
-        
+      <header
+        className={`sticky top-0 z-50 w-full transition-all duration-300 border-b 
+        ${
+          scrolled
+            ? "bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur-md border-slate-200/60 dark:border-slate-800/60 shadow-sm"
+            : "bg-white dark:bg-[#0F172A] border-transparent"
+        }`}
+      >
         <div className="h-16 md:h-20 max-w-[1600px] mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-10">
-          
           {!mobileSearchActive && (
             <div className="flex items-center gap-2 md:gap-4 transition-all animate-in fade-in duration-300">
-              <button 
+              <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="lg:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="xl:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <HiOutlineMenuAlt2 className="w-6 h-6" />
               </button>
               <div className="hidden sm:block">
-                <h2 className="hidden md:block text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-0.5">Platform</h2>
-                <p className="text-base md:text-lg font-bold text-slate-900 dark:text-white leading-none">Overview</p>
+                <h2 className="hidden md:block text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-0.5">
+                  Platform
+                </h2>
+                <p className="text-base md:text-lg font-bold text-slate-900 dark:text-white leading-none">
+                  Overview
+                </p>
               </div>
             </div>
           )}
 
-          <div className={`flex-1 transition-all duration-300 px-4 max-w-2xl 
-            ${mobileSearchActive ? "flex absolute inset-0 bg-white dark:bg-[#0F172A] z-50 items-center px-4" : "hidden md:flex justify-center"}`}>
-            
+          <div
+            className={`flex-1 transition-all duration-300 px-4 max-w-2xl 
+            ${mobileSearchActive ? "flex absolute inset-0 bg-white dark:bg-[#0F172A] z-50 items-center px-4" : "hidden md:flex justify-center"}`}
+          >
             <div className="relative w-full group">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <HiOutlineSearch className="h-5 w-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
@@ -77,9 +84,9 @@ export default function Header() {
                            text-sm text-slate-900 dark:text-slate-100 placeholder-slate-500
                            focus:ring-2 focus:ring-indigo-500/20 focus:bg-white dark:focus:bg-slate-800 transition-all"
               />
-              
+
               {mobileSearchActive && (
-                <button 
+                <button
                   onClick={() => setMobileSearchActive(false)}
                   className="absolute inset-y-0 right-2 px-2 text-slate-400 hover:text-slate-600 lg:hidden"
                 >
@@ -97,7 +104,7 @@ export default function Header() {
 
           {!mobileSearchActive && (
             <div className="flex items-center gap-1 sm:gap-3">
-              <button 
+              <button
                 onClick={() => setMobileSearchActive(true)}
                 className="md:hidden p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl"
               >
@@ -113,15 +120,23 @@ export default function Header() {
                 onClick={() => setIsDark(!isDark)}
                 className="hidden sm:flex p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all"
               >
-                {isDark ? <HiOutlineSun className="w-6 h-6" /> : <HiOutlineMoon className="w-6 h-6" />}
+                {isDark ? (
+                  <HiOutlineSun className="w-6 h-6" />
+                ) : (
+                  <HiOutlineMoon className="w-6 h-6" />
+                )}
               </button>
 
               <div className="h-6 w-[1px] bg-slate-200 dark:bg-slate-800 mx-1 hidden sm:block"></div>
 
               <button className="flex items-center gap-2 sm:gap-3 p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
                 <div className="hidden lg:flex flex-col items-end">
-                  <span className="text-xs font-bold text-slate-900 dark:text-white">Alex Rivera</span>
-                  <span className="text-[10px] font-medium text-indigo-500">Admin</span>
+                  <span className="text-xs font-bold text-slate-900 dark:text-white">
+                    Alex Rivera
+                  </span>
+                  <span className="text-[10px] font-medium text-indigo-500">
+                    Admin
+                  </span>
                 </div>
                 <img
                   src="https://ui-avatars.com/api/?name=Alex+Rivera&background=6366f1&color=fff"
@@ -135,16 +150,16 @@ export default function Header() {
         </div>
       </header>
 
-      <div 
+      <div
         className={`fixed inset-0 z-[60] lg:hidden transition-all duration-300 
           ${isMobileMenuOpen ? "visible opacity-100" : "invisible opacity-0"}`}
       >
-        <div 
+        <div
           className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
           onClick={() => setIsMobileMenuOpen(false)}
         />
-        
-        <div 
+
+        <div
           className={`absolute left-0 top-0 bottom-0 w-[280px] bg-white dark:bg-[#0F172A] shadow-2xl transition-transform duration-300 ease-out p-6
             ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
         >
@@ -153,9 +168,11 @@ export default function Header() {
               <div className="h-8 w-8 bg-indigo-600 rounded-lg flex items-center justify-center">
                 <div className="h-3 w-3 border-2 border-white rounded-sm rotate-45" />
               </div>
-              <span className="font-bold text-xl dark:text-white uppercase tracking-tighter">Nexus</span>
+              <span className="font-bold text-xl dark:text-white uppercase tracking-tighter">
+                PRIMEFEED
+              </span>
             </div>
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500"
             >
@@ -178,13 +195,17 @@ export default function Header() {
           </nav>
 
           <div className="absolute bottom-6 left-6 right-6">
-             <button
-                onClick={() => setIsDark(!isDark)}
-                className="w-full flex items-center justify-between p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 transition-all mb-4"
-              >
-                <span className="text-sm font-bold">Dark Mode</span>
-                {isDark ? <HiOutlineSun className="w-5 h-5" /> : <HiOutlineMoon className="w-5 h-5" />}
-              </button>
+            <button
+              onClick={() => setIsDark(!isDark)}
+              className="w-full flex items-center justify-between p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 transition-all mb-4"
+            >
+              <span className="text-sm font-bold">Dark Mode</span>
+              {isDark ? (
+                <HiOutlineSun className="w-5 h-5" />
+              ) : (
+                <HiOutlineMoon className="w-5 h-5" />
+              )}
+            </button>
             <div className="flex items-center gap-3 p-2">
               <img
                 src="https://ui-avatars.com/api/?name=Alex+Rivera&background=6366f1&color=fff"
@@ -192,7 +213,9 @@ export default function Header() {
                 alt="User"
               />
               <div>
-                <p className="text-sm font-bold dark:text-white leading-none">Alex Rivera</p>
+                <p className="text-sm font-bold dark:text-white leading-none">
+                  Alex Rivera
+                </p>
                 <p className="text-xs text-slate-500 mt-1">alex@nexus.com</p>
               </div>
             </div>
