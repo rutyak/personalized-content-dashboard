@@ -1,6 +1,14 @@
-import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+import { toggleFavorite } from "@/redux/slices/favoritesSlice";
+import { RootState } from "@/redux/store";
+import {
+  HiHeart,
+  HiOutlineArrowNarrowRight,
+  HiOutlineHeart,
+} from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
 
 interface Props {
+  id?: string | number;
   title: string;
   description: string;
   action: string;
@@ -13,6 +21,7 @@ interface Props {
 }
 
 export default function ContentCard({
+  id,
   title,
   description,
   action,
@@ -30,6 +39,24 @@ export default function ContentCard({
     "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000&auto=format&fit=crop";
   const displayImage = image || defaultImage;
 
+  const dispatch = useDispatch<any>();
+  const isFavorite = useSelector((state: RootState) =>
+    state.favorites.items.some((item: any) => item.id === id),
+  );
+
+  const handleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault();
+    dispatch(
+      toggleFavorite({
+        id,
+        title,
+        image,
+        category,
+        type: category || "unknown",
+      }),
+    );
+  };
+
   return (
     <div
       className={`group relative overflow-hidden rounded-2xl border transition-all duration-300 shadow-xl hover:-translate-y-1 h-[450px] w-full ${className}
@@ -39,8 +66,24 @@ export default function ContentCard({
           : "bg-white dark:bg-slate-800/50 border-slate-200/60 dark:border-slate-700/50 hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none"
       }`}
     >
+      <button
+        onClick={handleFavorite}
+        className={`absolute ${ isMovie || isSocial ? "top-14" : "top-4"} right-4 z-30 p-2 rounded-full backdrop-blur-md border transition-all active:scale-90
+        ${
+          isPrimary || isMovie
+            ? "bg-white/10 border-white/20 hover:bg-white/20"
+            : "bg-slate-100/80 border-slate-200 hover:bg-slate-200 dark:bg-white/10 dark:border-white/20"
+        }`}
+      >
+        {isFavorite ? (
+          <HiHeart className="w-5 h-5 text-red-500" />
+        ) : (
+          <HiOutlineHeart
+            className={`w-5 h-5 ${isPrimary || isMovie ? "text-white" : "text-slate-500 dark:text-white"}`}
+          />
+        )}
+      </button>
       <div className="flex flex-col h-full">
-        {/* Image Section */}
         {!isSocial && (
           <div
             className={`relative overflow-hidden shrink-0 w-full transition-all duration-500
@@ -60,7 +103,6 @@ export default function ContentCard({
           </div>
         )}
 
-        {/* Text Content Area */}
         <div
           className={`flex-1 flex flex-col p-4 sm:p-5 lg:p-6 z-20
           ${isMovie ? "absolute inset-0 justify-end bg-transparent" : "relative justify-start"}`}

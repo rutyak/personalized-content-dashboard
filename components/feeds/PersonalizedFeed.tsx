@@ -1,15 +1,20 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import ContentCard from "../cards/ContentCard";
 import { fetchNews } from "@/redux/slices/newsSlice";
 import { fetchMovies } from "@/redux/slices/movieSlice";
 import { fetchSocialPosts } from "@/redux/slices/socialSlice";
+import Pagination from "./pagination/Pagination";
 
 export default function PersonalizedFeed() {
   const dispatch = useDispatch<any>();
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Updated to 8 cards per page
+  const itemsPerPage = 6;
 
   const news = useSelector((state: RootState) => state.news.articles);
   const movies = useSelector((state: RootState) => state.movies.movies);
@@ -26,6 +31,7 @@ export default function PersonalizedFeed() {
     const combined = [
       ...(news || []).map((item: any) => ({
         ...item,
+        id: Date.now() + Math.random(),
         title: item.title,
         description:
           item.description?.length > 70
@@ -40,6 +46,7 @@ export default function PersonalizedFeed() {
       })),
       ...(movies || []).map((item: any) => ({
         ...item,
+        id: Date.now() + Math.random(),
         title: item.name,
         description: item.summary?.replace(/<[^>]*>?/gm, ""),
         category: "Movies",
@@ -51,6 +58,7 @@ export default function PersonalizedFeed() {
       })),
       ...(social || []).map((item: any) => ({
         ...item,
+        id: Date.now() + Math.random(),
         title: item.user,
         description: item.content,
         category: "Social",
@@ -65,6 +73,13 @@ export default function PersonalizedFeed() {
     return [...combined].sort(() => Math.random() - 0.5);
   }, [news, movies, social]);
 
+  const totalPages = Math.ceil(unifiedFeed.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const displayedItems = unifiedFeed.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
+
   if (status === "loading") {
     return <div className="text-center py-10">Loading your feed...</div>;
   }
@@ -72,16 +87,20 @@ export default function PersonalizedFeed() {
   return (
     <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="grid grid-cols-1 md:grid-cols-2 grid-flow-dense gap-y-5 sm:gap-6">
-        {unifiedFeed.map((item, index) => {
+        {displayedItems.map((item, index) => {
           const isSocial = item.type === "Social";
           const isWide = index % 3 === 0;
 
           const spanClass = isWide ? "col-span-1 md:col-span-2" : "col-span-1";
-          const heightClass = isSocial && isWide ? "h-auto" : "h-auto md:h-[450px]";
+          const heightClass =
+            isSocial && isWide ? "h-auto" : "h-auto md:h-[450px]";
+
+          const isTriggerCard = index === displayedItems.length - 5;
 
           return (
             <div key={`${item.type}-${index}`} className={spanClass}>
               <ContentCard
+                id={item.id}
                 title={item.title}
                 description={item.description}
                 category={item.category}
@@ -95,6 +114,14 @@ export default function PersonalizedFeed() {
           );
         })}
       </div>
+
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
     </section>
   );
 }

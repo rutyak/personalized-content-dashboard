@@ -1,24 +1,26 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { 
-  persistStore, 
+import {
+  persistStore,
   persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER, 
+  REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage"; 
+import storage from "redux-persist/lib/storage";
 import newsReducer from "./slices/newsSlice";
 import movieReducer from "./slices/movieSlice";
 import socialReducer from "./slices/socialSlice";
+import favoritesReducer from "./slices/favoritesSlice";
 
 // 1. Combine all your reducers
 const rootReducer = combineReducers({
   news: newsReducer,
   movies: movieReducer,
   social: socialReducer,
+  favorites: favoritesReducer
 });
 
 // 2. Configure persistence
