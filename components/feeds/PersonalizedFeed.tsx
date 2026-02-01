@@ -1,191 +1,86 @@
+"use client";
+
+import { useEffect, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../redux/store";
 import ContentCard from "../cards/ContentCard";
-import { HiOutlineSparkles, HiOutlineFilter } from "react-icons/hi";
+import { fetchNews } from "@/redux/slices/newsSlice";
+import { fetchMovies } from "@/redux/slices/movieSlice";
+import { fetchSocialPosts } from "@/redux/slices/socialSlice";
 
 export default function PersonalizedFeed() {
-  const feedItems = [
-    {
-      title:
-        "TikTok star Khaby Lame signs $975 million AI deal to create his digital twin",
-      description:
-        "The world's most-followed TikToker is venturing into the metaverse with a massive AI partnership.",
-      category: "News",
-      time: "1d ago",
-      image:
-        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
-      action: "Read More",
-      source: "News18",
-    },
-    {
-      title: "On the sets of Ramsay Brothers' Shaitani Ilaaka (1990)",
-      description:
-        "A nostalgic look back at the cult classic horror film featuring Kanwaljit Singh and the Ramsay legacy.",
-      category: "Movies",
-      time: "Trending",
-      image:
-        "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800",
-      action: "Watch Feature",
-      source: "Lehren",
-    },
-    {
-      title: "Parth emerges as key aide in political affairs",
-      description:
-        "New leadership dynamics surfacing as Son Parth takes a central role in Sunetra Pawar’s latest campaigns.",
-      category: "Social",
-      time: "2h ago",
-      image:
-        "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&q=80&w=800",
-      action: "Join Discussion",
-      source: "Hindustan Times",
-    },
-    {
-      title:
-        "TikTok star Khaby Lame signs $975 million AI deal to create his digital twin",
-      description:
-        "The world's most-followed TikToker is venturing into the metaverse with a massive AI partnership.",
-      category: "News",
-      time: "1d ago",
-      image:
-        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
-      action: "Read More",
-      source: "News18",
-    },
-    {
-      title: "On the sets of Ramsay Brothers' Shaitani Ilaaka (1990)",
-      description:
-        "A nostalgic look back at the cult classic horror film featuring Kanwaljit Singh and the Ramsay legacy.",
-      category: "Movies",
-      time: "Trending",
-      image:
-        "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800",
-      action: "Watch Feature",
-      source: "Lehren",
-    },
-    {
-      title: "Parth emerges as key aide in political affairs",
-      description:
-        "New leadership dynamics surfacing as Son Parth takes a central role in Sunetra Pawar’s latest campaigns.",
-      category: "Social",
-      time: "2h ago",
-      image:
-        "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&q=80&w=800",
-      action: "Join Discussion",
-      source: "Hindustan Times",
-    },
-    {
-      title:
-        "TikTok star Khaby Lame signs $975 million AI deal to create his digital twin",
-      description:
-        "The world's most-followed TikToker is venturing into the metaverse with a massive AI partnership.",
-      category: "News",
-      time: "1d ago",
-      image:
-        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
-      action: "Read More",
-      source: "News18",
-    },
-    {
-      title: "On the sets of Ramsay Brothers' Shaitani Ilaaka (1990)",
-      description:
-        "A nostalgic look back at the cult classic horror film featuring Kanwaljit Singh and the Ramsay legacy.",
-      category: "Movies",
-      time: "Trending",
-      image:
-        "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800",
-      action: "Watch Feature",
-      source: "Lehren",
-    },
-    {
-      title: "Parth emerges as key aide in political affairs",
-      description:
-        "New leadership dynamics surfacing as Son Parth takes a central role in Sunetra Pawar’s latest campaigns.",
-      category: "Social",
-      time: "2h ago",
-      image:
-        "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&q=80&w=800",
-      action: "Join Discussion",
-      source: "Hindustan Times",
-    },
-    {
-      title:
-        "TikTok star Khaby Lame signs $975 million AI deal to create his digital twin",
-      description:
-        "The world's most-followed TikToker is venturing into the metaverse with a massive AI partnership.",
-      category: "News",
-      time: "1d ago",
-      image:
-        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
-      action: "Read More",
-      source: "News18",
-    },
-    {
-      title: "On the sets of Ramsay Brothers' Shaitani Ilaaka (1990)",
-      description:
-        "A nostalgic look back at the cult classic horror film featuring Kanwaljit Singh and the Ramsay legacy.",
-      category: "Movies",
-      time: "Trending",
-      image:
-        "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800",
-      action: "Watch Feature",
-      source: "Lehren",
-    },
-    {
-      title: "Parth emerges as key aide in political affairs",
-      description:
-        "New leadership dynamics surfacing as Son Parth takes a central role in Sunetra Pawar’s latest campaigns.",
-      category: "Social",
-      time: "2h ago",
-      image:
-        "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&q=80&w=800",
-      action: "Join Discussion",
-      source: "Hindustan Times",
-    },
-    {
-      title:
-        "TikTok star Khaby Lame signs $975 million AI deal to create his digital twin",
-      description:
-        "The world's most-followed TikToker is venturing into the metaverse with a massive AI partnership.",
-      category: "News",
-      time: "1d ago",
-      image:
-        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800",
-      action: "Read More",
-      source: "News18",
-    },
-    {
-      title: "On the sets of Ramsay Brothers' Shaitani Ilaaka (1990)",
-      description:
-        "A nostalgic look back at the cult classic horror film featuring Kanwaljit Singh and the Ramsay legacy.",
-      category: "Movies",
-      time: "Trending",
-      image:
-        "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800",
-      action: "Watch Feature",
-      source: "Lehren",
-    },
-    {
-      title: "Parth emerges as key aide in political affairs",
-      description:
-        "New leadership dynamics surfacing as Son Parth takes a central role in Sunetra Pawar’s latest campaigns.",
-      category: "Social",
-      time: "2h ago",
-      image:
-        "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&q=80&w=800",
-      action: "Join Discussion",
-      source: "Hindustan Times",
-    },
-  ];
+  const dispatch = useDispatch<any>();
 
-  const getRandomSpan = () =>
-    Math.random() > 0.6 ? "col-span-1 md:col-span-2" : "col-span-1";
+  const news = useSelector((state: RootState) => state.news.articles);
+  const movies = useSelector((state: RootState) => state.movies.movies);
+  const social = useSelector((state: RootState) => state.social.posts);
+  const { status } = useSelector((state: RootState) => state.news);
+
+  useEffect(() => {
+    dispatch(fetchNews("technology"));
+    dispatch(fetchMovies("28"));
+    dispatch(fetchSocialPosts("trending"));
+  }, [dispatch]);
+
+  const unifiedFeed = useMemo(() => {
+    const combined = [
+      ...(news || []).map((item: any) => ({
+        ...item,
+        title: item.title,
+        description:
+          item.description?.length > 70
+            ? `${item.description.substring(0, 70)}...`
+            : item.description,
+        category: "News",
+        image: item.urlToImage,
+        action: "Read More",
+        source: item.source?.name || "News",
+        time: new Date(item.publishedAt).toLocaleDateString(),
+        type: "News",
+      })),
+      ...(movies || []).map((item: any) => ({
+        ...item,
+        title: item.name,
+        description: item.summary?.replace(/<[^>]*>?/gm, ""),
+        category: "Movies",
+        image: item.image?.original || item.image?.medium,
+        action: "Watch Now",
+        source: item.network?.name || "Streaming",
+        time: item.premiered,
+        type: "Movies",
+      })),
+      ...(social || []).map((item: any) => ({
+        ...item,
+        title: item.user,
+        description: item.content,
+        category: "Social",
+        image: `https://ui-avatars.com/api/?name=${item.user}&background=random`,
+        action: "Join Discussion",
+        source: "Social Feed",
+        time: `${item.likes} Likes`,
+        type: "Social",
+      })),
+    ];
+
+    return [...combined].sort(() => Math.random() - 0.5);
+  }, [news, movies, social]);
+
+  if (status === "loading") {
+    return <div className="text-center py-10">Loading your feed...</div>;
+  }
 
   return (
     <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="grid grid-cols-1 md:grid-cols-2 grid-flow-dense gap-y-5 sm:gap-6">
-        {feedItems.map((item, index) => {
-          const spanClass = getRandomSpan();
+        {unifiedFeed.map((item, index) => {
+          const isSocial = item.type === "Social";
+          const isWide = index % 3 === 0;
+
+          const spanClass = isWide ? "col-span-1 md:col-span-2" : "col-span-1";
+          const heightClass = isSocial && isWide ? "h-auto" : "h-auto md:h-[450px]";
 
           return (
-            <div key={index} className={spanClass}>
+            <div key={`${item.type}-${index}`} className={spanClass}>
               <ContentCard
                 title={item.title}
                 description={item.description}
@@ -193,9 +88,8 @@ export default function PersonalizedFeed() {
                 time={`${item.source} • ${item.time}`}
                 image={item.image}
                 action={item.action}
-                orientation={
-                  spanClass !== "col-span-1" ? "vertical" : "vertical"
-                }
+                orientation="vertical"
+                className={heightClass}
               />
             </div>
           );
