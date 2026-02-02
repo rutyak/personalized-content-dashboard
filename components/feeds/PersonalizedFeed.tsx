@@ -14,7 +14,7 @@ export default function PersonalizedFeed() {
   const [currentPage, setCurrentPage] = useState(1);
 
   // Updated to 8 cards per page
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
 
   const news = useSelector((state: RootState) => state.news.articles);
   const movies = useSelector((state: RootState) => state.movies.movies);
@@ -33,10 +33,7 @@ export default function PersonalizedFeed() {
         ...item,
         id: Date.now() + Math.random(),
         title: item.title,
-        description:
-          item.description?.length > 70
-            ? `${item.description.substring(0, 70)}...`
-            : item.description,
+        description: item.description,
         category: "News",
         image: item.urlToImage,
         action: "Read More",

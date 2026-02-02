@@ -4,9 +4,12 @@ interface FavoriteItem {
   id?: string | number;
   type: string;
   title: string;
-  image?: string;
+  description?: string;
   category?: string;
+  image?: string;
+  time: string;
 }
+
 
 interface FavoritesState {
   items: FavoriteItem[];
@@ -21,11 +24,13 @@ const favoritesSlice = createSlice({
   initialState,
   reducers: {
     toggleFavorite: (state, action: PayloadAction<FavoriteItem>) => {
-      const index = state.items.findIndex((item) => item.id === action.payload.id);
+      const index = state.items.findIndex(
+        (item) => item.id === action.payload.id,
+      );
       if (index >= 0) {
-        state.items.splice(index, 1); 
+        state.items.splice(index, 1);
       } else {
-        state.items.push(action.payload); 
+        state.items.push(action.payload);
       }
     },
   },
