@@ -4,9 +4,9 @@ import { useEffect, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
 import ContentCard from "../cards/ContentCard";
-import { fetchNews } from "@/redux/slices/newsSlice";
-import { fetchMovies } from "@/redux/slices/movieSlice";
-import { fetchSocialPosts } from "@/redux/slices/socialSlice";
+import { fetchNews } from "../../redux/slices/newsSlice";
+import { fetchMovies } from "../../redux/slices/movieSlice";
+import { fetchSocialPosts } from "../../redux/slices/socialSlice";
 import Pagination from "./pagination/Pagination";
 
 interface PersonalizedFeedProps {

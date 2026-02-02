@@ -5,7 +5,7 @@ import { Mousewheel, Autoplay } from "swiper/modules";
 import ContentCard from "../cards/ContentCard";
 import { HiOutlineBookmark } from "react-icons/hi";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { RootState } from "../../redux/store";
 
 import "swiper/css";
 

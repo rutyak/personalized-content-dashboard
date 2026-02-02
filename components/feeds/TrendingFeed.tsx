@@ -2,7 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Pagination, Autoplay } from "swiper/modules";
-import ContentCard from "@/components/cards/ContentCard";
+import ContentCard from "../cards/ContentCard";
 import { HiOutlineTrendingUp, HiOutlineFire } from "react-icons/hi";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -94,7 +94,6 @@ export default function TrendingFeed() {
       </div>
 
       <button
-        id="favorites"
         className="w-full mt-6 py-4 text-[11px] font-black text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all border-t border-slate-100 dark:border-slate-800 uppercase tracking-[0.2em] hover:tracking-[0.3em]"
       >
         View Leaderboard

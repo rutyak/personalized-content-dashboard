@@ -1,7 +1,7 @@
 "use client";
 
-import { toggleFavorite } from "@/redux/slices/favoritesSlice";
-import { RootState } from "@/redux/store";
+import { toggleFavorite } from "../../redux/slices/favoritesSlice";
+import { RootState } from "../../redux/store";
 import {
   HiHeart,
   HiOutlineArrowNarrowRight,
@@ -66,13 +66,13 @@ export default function ContentCard({
 
   return (
     <div
+      data-testid="content-card"
       className={`group relative overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-1 h-[480px] w-full ${className} ${
         isPrimary
           ? "bg-indigo-600 border-indigo-500 shadow-indigo-200 dark:shadow-none"
           : "bg-white dark:bg-slate-800/50 border-slate-200/60 dark:border-slate-700/50 hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-none"
       }`}
     >
-      {/* Favorite Button */}
       {!tending && (
         <button
           onClick={handleFavorite}
@@ -93,7 +93,6 @@ export default function ContentCard({
       )}
 
       <div className="flex flex-col h-full">
-        {/* Image Section */}
         {!isSocial && (
           <div
             className={`relative overflow-hidden shrink-0 w-full transition-all duration-500 ${isMovie ? "absolute inset-0 h-full" : "h-48 lg:h-56"}`}
@@ -109,11 +108,9 @@ export default function ContentCard({
           </div>
         )}
 
-        {/* Content Section */}
         <div
           className={`flex-1 flex flex-col p-5 lg:p-6 z-20 ${isMovie ? "absolute inset-0 justify-end bg-transparent" : "relative justify-start"}`}
         >
-          {/* Badge & Time */}
           <div className="flex items-center justify-between mb-4">
             {category && (
               <span
@@ -135,7 +132,6 @@ export default function ContentCard({
             )}
           </div>
 
-          {/* Title & Description */}
           <div className={isMovie ? "absolute mb-14" : "relative"}>
             <h3
               className={`font-bold mb-2 leading-tight tracking-tight text-lg lg:text-xl line-clamp-2 ${isPrimary || isMovie ? "text-white" : "text-slate-900 dark:text-white"}`}
@@ -157,7 +153,6 @@ export default function ContentCard({
             </p>
           </div>
 
-          {/* Action Button */}
           <div className="mt-auto">
             <button
               className={`absolute bottom-5 left-5 flex items-center gap-2 text-sm font-bold transition-all active:scale-95 group/btn ${

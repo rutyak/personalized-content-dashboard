@@ -40,7 +40,6 @@ export default function Dashboard() {
               />
             </div>
 
-            {/* Sidebar Feed Area */}
             <div className="lg:col-span-4 space-y-8 lg:space-y-10 order-2">
               <section>
                 <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 mb-4 lg:mb-6 px-2">
@@ -49,7 +48,7 @@ export default function Dashboard() {
                 <TrendingFeed />
               </section>
 
-              <section>
+              <section id="favorites">
                 <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 mb-4 lg:mb-6 px-2">
                   Saved Articles
                 </h3>
