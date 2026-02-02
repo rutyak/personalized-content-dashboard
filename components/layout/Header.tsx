@@ -143,7 +143,7 @@ export default function Header({
 
               <div className="h-6 w-[1px] bg-slate-200 dark:bg-slate-800 mx-1 hidden sm:block"></div>
 
-              <button className="flex items-center gap-2 sm:gap-3 p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+              <button className="flex items-center gap-2 sm:gap-3 px-3 py-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
                 <div className="hidden lg:flex flex-col items-end">
                   <span className="text-xs font-bold text-slate-900 dark:text-white">
                     Alex Rivera

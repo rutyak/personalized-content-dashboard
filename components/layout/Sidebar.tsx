@@ -8,8 +8,8 @@ import {
 } from "react-icons/hi";
 
 const navItems = [
-  { name: "Home", href: "/", icon: HiOutlineViewGrid },
-  { name: "Favorites", href: "/", icon: HiOutlineStar },
+  { name: "Home", href: "#home", icon: HiOutlineViewGrid },
+  { name: "Favorites", href: "#favorites", icon: HiOutlineStar },
   { name: "Settings", href: "/", icon: HiOutlineCog },
 ];
 
