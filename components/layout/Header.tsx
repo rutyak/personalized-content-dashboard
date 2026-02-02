@@ -15,7 +15,19 @@ import {
   HiOutlineCog,
 } from "react-icons/hi";
 
-export default function Header() {
+interface HeaderProps {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  debouncedQuery: string;
+  setDebouncedQuery: (query: string) => void;
+}
+
+export default function Header({
+  searchQuery,
+  setSearchQuery,
+  debouncedQuery,
+  setDebouncedQuery,
+}: HeaderProps) {
   const [isDark, setIsDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileSearchActive, setMobileSearchActive] = useState(false);
@@ -80,17 +92,19 @@ export default function Header() {
                 type="text"
                 autoFocus={mobileSearchActive}
                 placeholder="Search anything..."
+                value={searchQuery} // Bind to searchQuery prop
+                onChange={(e) => setSearchQuery(e.target.value)} // Update on change
                 className="w-full bg-slate-100 dark:bg-slate-800/50 border-none rounded-xl md:rounded-2xl py-2.5 pl-11 pr-12 
-                           text-sm text-slate-900 dark:text-slate-100 placeholder-slate-500
-                           focus:ring-2 focus:ring-indigo-500/20 focus:bg-white dark:focus:bg-slate-800 transition-all"
+             text-sm text-slate-900 dark:text-slate-100 placeholder-slate-500
+             focus:ring-2 focus:ring-indigo-500/20 focus:bg-white dark:focus:bg-slate-800 transition-all"
               />
 
-              {mobileSearchActive && (
+              {searchQuery && (
                 <button
-                  onClick={() => setMobileSearchActive(false)}
-                  className="absolute inset-y-0 right-2 px-2 text-slate-400 hover:text-slate-600 lg:hidden"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute inset-y-0 right-10 md:right-12 flex items-center px-2 text-slate-400 hover:text-rose-500 transition-colors"
                 >
-                  <HiX className="w-5 h-5" />
+                  <HiX className="w-4 h-4" />
                 </button>
               )}
 

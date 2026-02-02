@@ -8,9 +8,9 @@ import {
 } from "react-icons/hi";
 
 const navItems = [
-  { name: "Home", href: "/dashboard", icon: HiOutlineViewGrid },
-  { name: "Favorites", href: "/favorites", icon: HiOutlineStar },
-  { name: "Settings", href: "/settings", icon: HiOutlineCog },
+  { name: "Home", href: "/", icon: HiOutlineViewGrid },
+  { name: "Favorites", href: "/", icon: HiOutlineStar },
+  { name: "Settings", href: "/", icon: HiOutlineCog },
 ];
 
 export default function Sidebar() {

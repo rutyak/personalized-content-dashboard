@@ -9,7 +9,19 @@ import { fetchMovies } from "@/redux/slices/movieSlice";
 import { fetchSocialPosts } from "@/redux/slices/socialSlice";
 import Pagination from "./pagination/Pagination";
 
-export default function PersonalizedFeed() {
+interface PersonalizedFeedProps {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  debouncedQuery: string;
+  setDebouncedQuery: (query: string) => void;
+}
+
+export default function PersonalizedFeed({
+  searchQuery,
+  setSearchQuery,
+  debouncedQuery,
+  setDebouncedQuery,
+}: PersonalizedFeedProps) {
   const dispatch = useDispatch<any>();
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -26,6 +38,16 @@ export default function PersonalizedFeed() {
     dispatch(fetchMovies("28"));
     dispatch(fetchSocialPosts("trending"));
   }, [dispatch]);
+
+  //debounce search input
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+      setCurrentPage(1); 
+    }, 400); 
+
+    return () => clearTimeout(handler);
+  }, [searchQuery]);
 
   const unifiedFeed = useMemo(() => {
     const combined = [
@@ -67,8 +89,18 @@ export default function PersonalizedFeed() {
       })),
     ];
 
-    return [...combined].sort(() => Math.random() - 0.5);
-  }, [news, movies, social]);
+    // Filter by title, description, or tags
+    const filtered = combined.filter((item) => {
+      const target = debouncedQuery.toLowerCase();
+      return (
+        item.title?.toLowerCase().includes(target) ||
+        item.description?.toLowerCase().includes(target) ||
+        item.tags?.some((tag: string) => tag.toLowerCase().includes(target))
+      );
+    });
+
+    return filtered.sort(() => Math.random() - 0.5);
+  }, [news, movies, social, debouncedQuery]);
 
   const totalPages = Math.ceil(unifiedFeed.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -90,7 +122,7 @@ export default function PersonalizedFeed() {
 
           const spanClass = isWide ? "col-span-1 md:col-span-2" : "col-span-1";
           const heightClass =
-            isSocial && isWide ? "h-auto" : "h-auto md:h-[450px]";
+            isSocial && isWide ? "h-auto" : "h-auto md:h-[460px]";
 
           const isTriggerCard = index === displayedItems.length - 5;
 
