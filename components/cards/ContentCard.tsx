@@ -1,6 +1,5 @@
 "use client";
 
-import { startTransition } from "react";
 import { toggleFavorite } from "../../redux/slices/favoritesSlice";
 import { RootState } from "../../redux/store";
 import {
@@ -55,7 +54,6 @@ export default function ContentCard({
     e.stopPropagation();
     console.log("fav click");
 
-    startTransition(() => {
       dispatch(
         toggleFavorite({
           id,
@@ -67,7 +65,6 @@ export default function ContentCard({
           type: category || "unknown",
         }),
       );
-    });
   };
 
   return (
