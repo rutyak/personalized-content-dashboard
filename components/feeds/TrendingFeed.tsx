@@ -2,7 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Pagination, Autoplay } from "swiper/modules";
-import ContentCard from "@/components/cards/ContentCard";
+import ContentCard from "../cards/ContentCard";
 import { HiOutlineTrendingUp, HiOutlineFire } from "react-icons/hi";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -64,16 +64,27 @@ export default function TrendingFeed() {
 
       <div
         className={
-          trendingItems.length > 1 ? "h-[980px] w-full" : "h-[480px] w-full"
+          trendingItems.length > 1
+            ? "h-[480px] lg:h-[980px] w-full"
+            : "h-[480px] w-full"
         }
       >
         <Swiper
-          direction="vertical"
-          slidesPerView={trendingItems.length > 1 ? 2 : 1}
+          direction="horizontal"
+          breakpoints={{
+            680: {
+              slidesPerView: 2,
+            },
+            1024: {
+              direction: "vertical",
+              slidesPerView: 2,
+            },
+          }}
+          slidesPerView={1}
           spaceBetween={16}
-          mousewheel={true}
+          mousewheel={{ forceToAxis: true }}
           autoplay={{ delay: 3500, disableOnInteraction: false }}
-          modules={[Mousewheel, Pagination, Autoplay]}
+          modules={[Mousewheel, Autoplay]}
           className="h-full trending-swiper"
         >
           {trendingItems.map((item, index) => (

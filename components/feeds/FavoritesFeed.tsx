@@ -5,7 +5,7 @@ import { Mousewheel, Autoplay } from "swiper/modules";
 import ContentCard from "../cards/ContentCard";
 import { HiOutlineBookmark } from "react-icons/hi";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { RootState } from "../../redux/store";
 
 import "swiper/css";
 
@@ -40,18 +40,29 @@ export default function FavoritesFeed() {
 
       <div
         className={
-          favoriteItems.length > 1 ? "h-[980px] w-full" : "h-[480px] w-full"
+          favoriteItems.length > 1
+            ? "h-[480px] lg:h-[980px] w-full"
+            : "h-[480px] w-full"
         }
       >
         {favoriteItems && favoriteItems.length > 0 ? (
           <Swiper
-            direction="vertical"
-            slidesPerView={favoriteItems.length > 1 ? 2 : 1}
+            direction="horizontal"
+            breakpoints={{
+              680: {
+                slidesPerView: 2,
+              },
+              1024: {
+                direction: "vertical",
+                slidesPerView: 2,
+              },
+            }}
+            slidesPerView={1}
             spaceBetween={16}
-            mousewheel={true}
+            mousewheel={{ forceToAxis: true }}
             autoplay={{ delay: 3500, disableOnInteraction: false }}
             modules={[Mousewheel, Autoplay]}
-            className="h-full"
+            className="h-full trending-swiper"
           >
             {favoriteItems.map((item, index) => (
               <SwiperSlide key={item.id || index} className="pb-2">
