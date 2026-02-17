@@ -48,7 +48,7 @@ function SortableItem({ item, index, isWide, heightClass }: any) {
     transform: CSS.Transform.toString(transform),
     transition,
     zIndex: isDragging ? 50 : 0,
-    opacity: isDragging ? 0.5 : 1,
+    opacity: isDragging ? 0.6 : 1,
   };
 
   const spanClass = isWide ? "col-span-1 md:col-span-2" : "col-span-1";
@@ -57,10 +57,17 @@ function SortableItem({ item, index, isWide, heightClass }: any) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`${spanClass} cursor-grab active:cursor-grabbing`}
-      {...attributes}
-      {...listeners}
+      className={`${spanClass} relative`}
     >
+      {/* Drag Handle */}
+      <div
+        {...attributes}
+        {...listeners}
+        className="absolute top-3 left-3 z-[200] cursor-grab active:cursor-grabbing bg-black/50 text-white text-xs px-2 py-1 rounded-md"
+      >
+        Drag
+      </div>
+
       <ContentCard
         id={item.id}
         title={item.title}

@@ -150,8 +150,8 @@ export default function ContentCard({
                     : "line-clamp-3"
               } ${isPrimary || isMovie ? "text-indigo-100/90" : "text-slate-500 dark:text-slate-400"}`}
             >
-              {description?.length > 70
-                ? `${description.substring(0, 80)}...`
+              {description?.length > 100
+                ? `${description.substring(0, 100)}...`
                 : description}
             </p>
           </div>
